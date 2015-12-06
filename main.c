@@ -12,7 +12,7 @@ int main(){
 	int *avgFace;
 	float **CovaNew = malloc(25*sizeof(float));
 	float **eigenVect = malloc(25*sizeof(float));
-	float *useless = NULL;
+	float *useless =  malloc(25*sizeof(float));
 
 	vect = ImageVectors();
 	avgFace = AverageFace(vect);

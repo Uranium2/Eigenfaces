@@ -37,13 +37,12 @@ int dsvd(float **a, int m, int n, float *w, float **v)
     double c, f, h, s, x, y, z;
     double anorm = 0.0, g = 0.0, scale = 0.0;
     double *rv1;
-  
+	w = malloc(n*sizeof(float));
     if (m < n) 
     {
         fprintf(stderr, "#rows must be > #cols \n");
         return(0);
     }
-  
     rv1 = (double *)malloc((unsigned int) n*sizeof(double));
 
 /* Householder reduction to bidiagonal form */
@@ -84,7 +83,6 @@ int dsvd(float **a, int m, int n, float *w, float **v)
             }
         }
         w[i] = (float)(scale * g);
-    
         /* right-hand reduction */
         g = s = scale = 0.0;
         if (i < m && i != n - 1) 
