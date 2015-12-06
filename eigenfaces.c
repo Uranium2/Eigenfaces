@@ -72,7 +72,7 @@ void DisplayImage(VectFace* vect){
 	for(int i = 0; i < 24; i++){
 		for(int j = 0; j < 24; j++){
 			Uint8 val;
-			val = vect[24].pixelVect[count];
+			val = vect[17].pixelVect[count];
 			putpixel(img,i,j,val);
 			count++;
 		}
@@ -118,4 +118,21 @@ VectFace* Covariance(VectFace *vect, VectFace *trans){
 		}
 	}
 	return cov;
+}
+
+int* eigenFace(VectFace *vect, float *eigenVector){
+
+	int *face = malloc(24*24*sizeof(int));
+	int sum = 0;
+
+	for(int i = 0; i < 24*24; i++){
+		for(int k = 0; k < 25; k++){
+				sum += vect[i].pixelVect[k] * eigenVector[k];
+
+			}
+			face[i] = sum;
+			sum = 0;
+		
+	}
+	return face;
 }

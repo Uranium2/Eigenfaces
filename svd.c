@@ -37,7 +37,7 @@ int dsvd(float **a, int m, int n, float *w, float **v)
     double c, f, h, s, x, y, z;
     double anorm = 0.0, g = 0.0, scale = 0.0;
     double *rv1;
-	w = malloc(n*sizeof(float));
+    w = malloc(n*sizeof(float));
     if (m < n) 
     {
         fprintf(stderr, "#rows must be > #cols \n");

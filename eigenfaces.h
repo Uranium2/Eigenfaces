@@ -27,3 +27,5 @@ VectFace* Trans(VectFace *vect);
 void DisplayImage(VectFace* vect);
 
 VectFace* Covariance(VectFace *vect, VectFace* trans);
+
+int* eigenFace(VectFace *vect, float *eigenVector);

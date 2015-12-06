@@ -13,6 +13,8 @@ int main(){
 	float **CovaNew = malloc(25*sizeof(float));
 	float **eigenVect = malloc(25*sizeof(float));
 	float *useless =  malloc(25*sizeof(float));
+	//eigen = malloc(1*sizeof(VectFace));
+	//eigen[0].pixelVect = malloc(24*24*sizeof(int));	
 
 	vect = ImageVectors();
 	avgFace = AverageFace(vect);
@@ -31,6 +33,8 @@ int main(){
 	}
 	
         dsvd(CovaNew, 25, 25, useless, eigenVect);	
+	//eigFace = eigenFace(vect, eigenVect[1]);
+	//eigen[0].pixelVect = eigFace;
 
 	for(int i = 0; i < 25; i++){
 		for(int j = 0; j < 25; j++){
@@ -42,7 +46,7 @@ int main(){
 		}
 	}
 		
-	//printf("| \n");
+	printf("| \n");
 
-//	DisplayImage(vect);
+	DisplayImage(vect);
 }
