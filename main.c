@@ -4,7 +4,7 @@
 # include <stdlib.h>
 # include "eigenfaces.h"
 # include "svd.h"
-
+# include "grey_scale.h"
 
 int main(){
 
@@ -15,6 +15,7 @@ int main(){
 	float *useless =  malloc(25*sizeof(float));
 	//eigen = malloc(1*sizeof(VectFace));
 	//eigen[0].pixelVect = malloc(24*24*sizeof(int));	
+	SDL_Surface *imgavg = load_image("img.jpg");
 
 	vect = ImageVectors();
 	avgFace = AverageFace(vect);
@@ -45,8 +46,19 @@ int main(){
 			//printf(" |%d", TransVect[i].pixelVect[j]);
 		}
 	}
-		
+	
 	printf("| \n");
-
+	int count = 0;
+	for(int i = 0; i < 24; i++){
+		for(int j = 0; j < 24; j++){
+			Uint8 val;
+			val = avgFace[count];
+			putpixel(imgavg,i,j,val);
+			count++;
+		}
+	}
+	grey_scale(imgavg);
+	display_image(imgavg);
 	DisplayImage(vect);
+
 }

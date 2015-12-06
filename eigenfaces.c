@@ -12,12 +12,12 @@ VectFace* ImageVectors(){
 
 		SDL_Surface *img;
 		char path[8];
-
+		init_sdl();
 		sprintf(path, "Faces/f%d", i);
 		strcat(path, ".pgm");	
 		img = load_image(path);
 		vect[i-1].pixelVect = malloc(24*24*sizeof(int));
-
+		display_image(img);
 		int count = 0;
 		for(int j = 0; j < 24; j++){
 			for(int k = 0; k < 24; k++){
@@ -67,20 +67,21 @@ void DisplayImage(VectFace* vect){
 	init_sdl();
 
 	SDL_Surface *img = load_image("img.jpg");
-	int count = 0;
-
-	for(int i = 0; i < 24; i++){
-		for(int j = 0; j < 24; j++){
-			Uint8 val;
-			val = vect[17].pixelVect[count];
-			putpixel(img,i,j,val);
-			count++;
+	for(int k = 0; k < 24; k++)
+	{
+		int count = 0;
+		for(int i = 0; i < 24; i++){
+			for(int j = 0; j < 24; j++){
+				Uint8 val;
+				val = vect[k].pixelVect[count];
+				putpixel(img,i,j,val);
+				count++;
+			}
 		}
-	}
 
-	grey_scale(img);
-	display_image(img);
-	wait_for_keypressed();
+		grey_scale(img);
+		display_image(img);
+	}
 }
 
 VectFace* Trans(VectFace *vect){
@@ -127,12 +128,12 @@ int* eigenFace(VectFace *vect, float *eigenVector){
 
 	for(int i = 0; i < 24*24; i++){
 		for(int k = 0; k < 25; k++){
-				sum += vect[i].pixelVect[k] * eigenVector[k];
+			sum += vect[i].pixelVect[k] * eigenVector[k];
 
-			}
-			face[i] = sum;
-			sum = 0;
-		
+		}
+		face[i] = sum;
+		sum = 0;
+
 	}
 	return face;
 }
