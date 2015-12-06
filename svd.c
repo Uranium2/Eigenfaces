@@ -1,5 +1,4 @@
-/* 
- * svdcomp - SVD decomposition routine. 
+/*vdcomp - SVD decomposition routine. 
  * Takes an mxn matrix a and decomposes it into udv, where u,v are
  * left and right orthogonal transformation matrices, and d is a 
  * diagonal matrix of singular values.
@@ -300,4 +299,4 @@ int dsvd(float **a, int m, int n, float *w, float **v)
     return(1);
 }
 
-
+ 

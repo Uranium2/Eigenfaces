@@ -3,6 +3,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include "eigenfaces.h"
+# include "grey_scale.h"
 
 VectFace* ImageVectors(){
 
@@ -61,6 +62,27 @@ VectFace* Normalize(VectFace *vect, int* avgFace){
 	return vect;
 }
 
+void DisplayImage(VectFace* vect){
+
+init_sdl();
+
+SDL_Surface *img = load_image("img.jpg");
+int count = 0;
+
+for(int i = 0; i < 24; i++){
+		for(int j = 0; j < 24; j++){
+			Uint8 val;
+			val = vect[20].pixelVect[count];
+			putpixel(img,i,j,val);
+			count++;
+		}
+	}
+
+	grey_scale(img);
+	display_image(img);
+	wait_for_keypressed();
+}
+
 VectFace* Trans(VectFace *vect){
 
 	VectFace *trans = malloc(24*24*sizeof(VectFace));
@@ -92,4 +114,18 @@ VectFace* Covariance(VectFace *vect, VectFace *trans){
 		}
 	}
 	return cov;
+}
+
+float** svdEigen(float** covar){
+	printf("test0 \n");	
+	float **v = calloc(25, sizeof(float));
+	float *w = calloc(25, sizeof(float));
+	printf("test1 \n");
+	for(int i = 0; i < 25; i++)
+		v[i] = calloc(25,sizeof(float));
+	printf("test2 \n");
+	dsvd(covar,25,25,w,v);
+	printf("test3 \n");
+
+        return v;	
 }
