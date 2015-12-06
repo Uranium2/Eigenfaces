@@ -23,3 +23,5 @@ int* AverageFace(VectFace *vect);
 VectFace* Normalize(VectFace *vect, int* avgFace);
 
 VectFace* Trans(VectFace *vect);
+
+VectFace* Covariance(VectFace *vect, VectFace* trans);

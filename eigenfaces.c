@@ -64,12 +64,12 @@ VectFace* Normalize(VectFace *vect, int* avgFace){
 VectFace* Trans(VectFace *vect){
 
 	VectFace *trans = malloc(24*24*sizeof(VectFace));
-	
+
 	for(int i = 0; i < 24*24; i++){
-		
+
 		trans[i].pixelVect = malloc(25*sizeof(int));		
 		for(int j = 0; j < 25; j++){
-			
+
 			trans[i].pixelVect[j] = vect[j].pixelVect[i];
 		}
 	}
@@ -78,7 +78,18 @@ VectFace* Trans(VectFace *vect){
 
 VectFace* Covariance(VectFace *vect, VectFace *trans){
 
-VectFace *cov = malloc(25*sizeof(VectFace));
+	VectFace *cov = malloc(25*sizeof(VectFace));
+	int sum = 0;
 
-for(
+	for(int i = 0; i < 25; i++){
+		cov[i].pixelVect = malloc(25*sizeof(int));
+		for(int j = 0; j < 25; j++){
+			for(int k = 0; k < 24*24; k++){
+				sum += vect[i].pixelVect[k] * trans[k].pixelVect[j];
+			}
+			cov[i].pixelVect[j] = sum;
+			sum = 0;		
+		}
+	}
+	return cov;
 }
