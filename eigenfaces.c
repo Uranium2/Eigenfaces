@@ -64,15 +64,15 @@ VectFace* Normalize(VectFace *vect, int* avgFace){
 
 void DisplayImage(VectFace* vect){
 
-init_sdl();
+	init_sdl();
 
-SDL_Surface *img = load_image("img.jpg");
-int count = 0;
+	SDL_Surface *img = load_image("img.jpg");
+	int count = 0;
 
-for(int i = 0; i < 24; i++){
+	for(int i = 0; i < 24; i++){
 		for(int j = 0; j < 24; j++){
 			Uint8 val;
-			val = vect[20].pixelVect[count];
+			val = vect[24].pixelVect[count];
 			putpixel(img,i,j,val);
 			count++;
 		}
@@ -89,7 +89,9 @@ VectFace* Trans(VectFace *vect){
 
 	for(int i = 0; i < 24*24; i++){
 
-		trans[i].pixelVect = malloc(25*sizeof(int));		
+		trans[i].pixelVect = malloc(25*sizeof(int));			
+	}		
+	for(int i = 0; i < 24*24; i++){
 		for(int j = 0; j < 25; j++){
 
 			trans[i].pixelVect[j] = vect[j].pixelVect[i];
@@ -102,9 +104,11 @@ VectFace* Covariance(VectFace *vect, VectFace *trans){
 
 	VectFace *cov = malloc(25*sizeof(VectFace));
 	int sum = 0;
-
 	for(int i = 0; i < 25; i++){
 		cov[i].pixelVect = malloc(25*sizeof(int));
+	}
+	for(int i = 0; i < 25; i++){
+
 		for(int j = 0; j < 25; j++){
 			for(int k = 0; k < 24*24; k++){
 				sum += vect[i].pixelVect[k] * trans[k].pixelVect[j];
@@ -114,18 +118,4 @@ VectFace* Covariance(VectFace *vect, VectFace *trans){
 		}
 	}
 	return cov;
-}
-
-float** svdEigen(float** covar){
-	printf("test0 \n");	
-	float **v = calloc(25, sizeof(float));
-	float *w = calloc(25, sizeof(float));
-	printf("test1 \n");
-	for(int i = 0; i < 25; i++)
-		v[i] = calloc(25,sizeof(float));
-	printf("test2 \n");
-	dsvd(covar,25,25,w,v);
-	printf("test3 \n");
-
-        return v;	
 }

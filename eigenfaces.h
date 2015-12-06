@@ -2,7 +2,6 @@
 # include "sdl_stuff.h"
 # include <stdio.h>
 # include <stdlib.h>
-# include "svd.h"
 
 #ifndef VectFace
 #define Vectface
@@ -28,5 +27,3 @@ VectFace* Trans(VectFace *vect);
 void DisplayImage(VectFace* vect);
 
 VectFace* Covariance(VectFace *vect, VectFace* trans);
-
-float** svdEigen(float** covar);
